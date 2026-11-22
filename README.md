@@ -2,6 +2,10 @@
 
 An unofficial Android port of **LPairs2**, a classic memory (pairs) game with animal pictures, originally written for Linux by Michael Speck. The game itself is unchanged: same rules, same modes, same sounds and artwork. This project wraps the original C++/SDL2 code in an Android app and adjusts it for touch screens.
 
+## Creator Notes
+
+**WARNING:** This entire project was made with AI and was simply made for my personal use and to test the limits of AI models. Do not use it if you are against AI and vibecoding. I do **NOT** endorse the entire use of AI in you're projects and I do **NOT** support full time vibecoders because I make and write my own code for my own projects. That said, once again, I made this solely so I can play the game on the go. I do not have any C/C++ experience, and I do want to apologize for the fact that I used AI to make this. you **DO** not have to use this, I simply felt like sharing this so that others would want to mess around with it, and of course, to push the limits of Anthropics Claude 5.5 Sonnet and OpenAIs GPT-6.
+
 > This is not an official release and is not affiliated with or endorsed by the original author.
 
 ## Features (from the original game)
@@ -94,4 +98,4 @@ Parts of the code and documentation in this port were written with AI assistance
 ## Links
 
 - Original LPairs2 / LGames: https://lgames.sourceforge.io/ (check for the current upstream location)
-- This port: [YOUR REPOSITORY URL]
+- This port: https://github.com/BRANDONALT4333/LPairs2-Android
