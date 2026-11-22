@@ -38,4 +38,23 @@ source = source.replace('if (!Objects.equals(hint, "")) {', 'if (hint != null &&
 path.write_text(source)
 PY
 
+# SDL_image 2.0.2's Android.mk lists IMG_WIC.c, a Windows Imaging
+# Component backend that is not present in every release source archive and
+# is not used on Android. Remove the stale source entry when the file is absent.
+python3 - <<'PY'
+from pathlib import Path
+import re
+
+image_dir = Path("third_party/SDL2_image")
+makefile = image_dir / "Android.mk"
+wic_source = image_dir / "IMG_WIC.c"
+if not wic_source.exists():
+    source = makefile.read_text()
+    source, removed = re.subn(r"^[ \\t]*IMG_WIC\\.c[ \\t]*\\\\[ \\t]*\\n", "", source, flags=re.MULTILINE)
+    if removed != 1:
+        raise SystemExit(f"Expected one IMG_WIC.c entry in {makefile}, removed {removed}")
+    makefile.write_text(source)
+    print("Removed unavailable Windows-only IMG_WIC.c from SDL2_image Android sources.")
+PY
+
 echo "Legacy SDL sources are ready."
