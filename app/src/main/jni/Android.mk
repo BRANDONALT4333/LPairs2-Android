@@ -19,6 +19,10 @@ include $(SDL2_IMAGE_PATH)/Android.mk
 include $(SDL2_TTF_PATH)/Android.mk
 include $(SDL2_MIXER_PATH)/Android.mk
 
+# Each SDL add-on Android.mk changes LOCAL_PATH. Restore this project's
+# JNI directory before declaring the LPairs2 shared library.
+LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
 LOCAL_MODULE := main
 LOCAL_SRC_FILES := $(patsubst $(LOCAL_PATH)/%,%, $(wildcard $(ROOT_PATH)/app/src/main/cpp/lpairs2/*.cpp))
