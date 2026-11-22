@@ -1,5 +1,5 @@
 LOCAL_PATH := $(call my-dir)
-ROOT_PATH := $(LOCAL_PATH)/../../../..
+ROOT_PATH := $(abspath $(LOCAL_PATH)/../../../..)
 
 SDL2_PATH := $(ROOT_PATH)/third_party/SDL2
 SDL2_IMAGE_PATH := $(ROOT_PATH)/third_party/SDL2_image
