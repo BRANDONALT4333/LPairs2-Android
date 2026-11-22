@@ -12,7 +12,6 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v4
 
-      # Current Android command-line tools require Java 17.
       - name: Set up Java 17 for Android SDK
         uses: actions/setup-java@v4
         with:
@@ -28,10 +27,20 @@ jobs:
 
       - name: Install legacy Android build tools
         run: |
-          sdkmanager --install "platforms;android-28" "build-tools;28.0.3" "ndk;15.2.4203891"
+          sdkmanager --install "platforms;android-28" "build-tools;28.0.3"
           yes | sdkmanager --licenses
 
-      # The legacy Gradle 4.6 build runs on Java 8.
+      # NDK r15 is no longer listed in the current SDK repository.
+      # Download the pinned legacy NDK directly from Google's archive.
+      - name: Install Android NDK r15b
+        run: |
+          curl -fL --retry 3 https://dl.google.com/android/repository/android-ndk-r15c-linux-x86_64.zip -o /tmp/android-ndk.zip
+          mkdir -p "$ANDROID_SDK_ROOT/ndk"
+          unzip -q /tmp/android-ndk.zip -d "$ANDROID_SDK_ROOT/ndk"
+          mv "$ANDROID_SDK_ROOT/ndk/android-ndk-r15c" "$ANDROID_SDK_ROOT/ndk/15.2.4203891"
+          echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/15.2.4203891" >> "$GITHUB_ENV"
+          echo "$ANDROID_SDK_ROOT/ndk/15.2.4203891" >> "$GITHUB_PATH"
+
       - name: Set up Java 8 for legacy Gradle
         uses: actions/setup-java@v4
         with:
