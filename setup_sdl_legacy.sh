@@ -50,7 +50,7 @@ makefile = image_dir / "Android.mk"
 wic_source = image_dir / "IMG_WIC.c"
 if not wic_source.exists():
     source = makefile.read_text()
-    source, removed = re.subn(r"^[ \\t]*IMG_WIC\\.c[ \\t]*\\\\[ \\t]*\\n", "", source, flags=re.MULTILINE)
+    source, removed = re.subn(r"^[ \t]*IMG_WIC\.c[ \t]*\\[ \t]*\n", "", source, flags=re.MULTILINE)
     if removed != 1:
         raise SystemExit(f"Expected one IMG_WIC.c entry in {makefile}, removed {removed}")
     makefile.write_text(source)
