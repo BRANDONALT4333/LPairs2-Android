@@ -31,7 +31,7 @@ from pathlib import Path
 import sys
 p = Path(sys.argv[1])
 s = p.read_text()
-s = s.replace("import java.util.Objects;\\n", "")
+s = s.replace("import java.util.Objects;\n", "")
 s = s.replace('if (!Objects.equals(hint, "")) {', 'if (hint == null || !hint.equals("")) {')
 p.write_text(s)
 PY
