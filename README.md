@@ -39,8 +39,10 @@ All game modes have been played through and work on every device below. Game, so
 |---|---|---|
 | Chromebook (Intel Celeron N4500) | ChromeOS Android runtime | x86_64 |
 | Samsung Galaxy S25 Ultra | 17 | ARM64 |
-| Google Pixel 4a | not recorded | ARM64 |
-| Samsung Galaxy S21 | not recorded | ARM64 |
+| Samsung Galaxy S25 | 17 | ARM64 |
+| Samsung Galaxy A56 | 16 | ARM64 |
+| Google Pixel 4a | 13 | ARM64 |
+| Samsung Galaxy S21 | 14 | ARM64 |
 
 This is a small test group, so other devices may behave differently. If you find a problem, please open an issue and include your device model and Android version. The APK is built for `arm64-v8a`, `armeabi-v7a` and `x86_64`; the 32-bit ARM build (`armeabi-v7a`) has not been tested on a real device.
 
