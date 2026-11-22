@@ -38,23 +38,22 @@ source = source.replace('if (!Objects.equals(hint, "")) {', 'if (hint != null &&
 path.write_text(source)
 PY
 
-# SDL_image 2.0.2's Android.mk lists IMG_WIC.c, a Windows Imaging
-# Component backend that is not present in every release source archive and
-# is not used on Android. Remove the stale source entry when the file is absent.
+# SDL_image's Android.mk can list IMG_WIC.c even though the file is
+# absent from the Android source archive. WIC is Windows-only and unused here.
+# Remove any matching source-list line, but tolerate releases where it is
+# already absent. This keeps setup idempotent across SDL_image archive layouts.
 python3 - <<'PY'
 from pathlib import Path
-import re
 
-image_dir = Path("third_party/SDL2_image")
-makefile = image_dir / "Android.mk"
-wic_source = image_dir / "IMG_WIC.c"
-if not wic_source.exists():
-    source = makefile.read_text()
-    source, removed = re.subn(r"^[ \t]*IMG_WIC\.c[ \t]*\\[ \t]*\n", "", source, flags=re.MULTILINE)
-    if removed != 1:
-        raise SystemExit(f"Expected one IMG_WIC.c entry in {makefile}, removed {removed}")
-    makefile.write_text(source)
-    print("Removed unavailable Windows-only IMG_WIC.c from SDL2_image Android sources.")
+makefile = Path("third_party/SDL2_image/Android.mk")
+lines = makefile.read_text().splitlines(keepends=True)
+filtered = [line for line in lines if "IMG_WIC.c" not in line]
+removed = len(lines) - len(filtered)
+if removed:
+    makefile.write_text("".join(filtered))
+    print(f"Removed {removed} unavailable Windows-only IMG_WIC.c source entry.")
+else:
+    print("No IMG_WIC.c entry present; SDL2_image Android.mk already compatible.")
 PY
 
 echo "Legacy SDL sources are ready."
