@@ -84,7 +84,7 @@ The picture files in this repository were re-encoded as baseline JPEG (see "What
 
 - **Michael Speck** - author of LPairs2 and the LGames project, whose open-source release made this port possible
 - **Photographers and artists** listed in `CREDITS`
-- **[YOUR NAME]** - idea, building, and device testing
+- **EclipseGMD** - idea, building, and device testing
 - **Simurated** - playtesting
 - **Claude (Anthropic)** - wrote the Android port of the code and project setup
 - **ChatGPT (OpenAI)** - helped produce the APK build
