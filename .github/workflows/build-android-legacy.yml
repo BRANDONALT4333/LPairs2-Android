@@ -30,9 +30,7 @@ jobs:
           sdkmanager --install "platforms;android-28" "build-tools;28.0.3"
           yes | sdkmanager --licenses
 
-      # NDK r15 is no longer listed in the current SDK repository.
-      # Download the pinned legacy NDK directly from Google's archive.
-      - name: Install Android NDK r15b
+      - name: Install Android NDK r15c
         run: |
           curl -fL --retry 3 https://dl.google.com/android/repository/android-ndk-r15c-linux-x86_64.zip -o /tmp/android-ndk.zip
           mkdir -p "$ANDROID_SDK_ROOT/ndk"
